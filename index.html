@@ -132,12 +132,40 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .kv b{font-family:var(--mono);color:var(--ink);font-weight:600}
 
 @media(prefers-reduced-motion:reduce){.rv{transition:none!important;opacity:1;transform:none}html{scroll-behavior:auto}.deck{scroll-behavior:auto}}
+
+/* ---------- tabela final de órgãos ---------- */
+.slide.tbl-slide{justify-content:flex-start;padding-top:5vh;padding-bottom:4vh}
+.tbl-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.2rem}
+.tbl-wrap{width:100%;max-width:1320px;margin:0 auto;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.tbl-scroll{max-height:70vh;overflow-y:auto}
+.ftbl{width:100%;border-collapse:collapse;font-size:.82rem;table-layout:fixed}
+.ftbl thead th{position:sticky;top:0;z-index:2;background:var(--ink);color:#fff;text-align:left;padding:.7rem .85rem;font-weight:600;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase}
+.ftbl col.c-og{width:20%}.ftbl col.c-vl{width:12%}.ftbl col.c-df{width:12%}.ftbl col.c-pc{width:8%}.ftbl col.c-ju{width:48%}
+.ftbl th.vl,.ftbl th.df,.ftbl th.pc{text-align:right}
+.ftbl td{padding:.6rem .85rem;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.4}
+.ftbl tr:nth-child(even) td{background:#faf9f5}
+.ftbl td.og{font-weight:600;color:var(--ink);font-size:.86rem}
+.ftbl td.vl{text-align:right;font-weight:600;color:var(--ink);white-space:nowrap}
+.ftbl td.df{text-align:right;color:var(--ink-soft);white-space:nowrap}
+.ftbl td.pc{text-align:right}
+.ftbl td.ju{color:var(--ink-soft);font-size:.78rem}
+.ftbl .pill{font-size:.72rem;padding:.1em .55em}
+.ftbl tr.total td{background:var(--ink)!important;color:#fff;font-weight:700;border:none}
+.ftbl tr.total td.vl,.ftbl tr.total td.df{color:#fff}
+.legend-inline{display:flex;gap:1.2rem;flex-wrap:wrap;font-size:.76rem;color:var(--ink-soft);margin-top:.9rem}
+.legend-inline span{display:flex;align-items:center;gap:.4em}
+@media(max-width:820px){
+  .ftbl{font-size:.72rem}
+  .ftbl col.c-ju{width:0}
+  .ftbl th.ju,.ftbl td.ju{display:none}
+  .ftbl col.c-og{width:40%}.ftbl col.c-vl{width:24%}.ftbl col.c-df{width:22%}.ftbl col.c-pc{width:14%}
+}
 </style>
 </head>
 <body>
 <div class="rail" id="rail"></div>
 <div class="meta"><span class="rgb"><span>R</span><span>G</span><span>B</span></span><span>·</span><span>MGI · SGP</span></div>
-<div class="counter" id="counter">01 / 20</div>
+<div class="counter" id="counter">01 / 23</div>
 <div class="hint" id="hint"><span class="k">↓</span> ou <span class="k">→</span> para avançar</div>
 
 <div class="deck" id="deck">
@@ -303,6 +331,35 @@ svg{display:block;width:100%;height:auto;overflow:visible}
       <div class="rv d4">
         <div class="tag" style="margin-bottom:.8rem">Quanto cada ano pesa no IHE</div>
         <div id="chart-weights"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08b · COMO FUNCIONA O PESO DE 60% -->
+<section class="slide" data-title="A conta dos 60%">
+  <div class="wide">
+    <div class="eyebrow rv">Passo a passo — a conta dos pesos</div>
+    <h2 class="rv d1" style="margin:1rem 0 1.2rem;max-width:22ch">Como um ano “vale 60% do seguinte”?</h2>
+    <p class="lead rv d2" style="max-width:60ch;margin-bottom:1.8rem">Imagine que você tem <strong>R$ 1,00 para apostar na importância de cada ano</strong>. Você aposta o valor cheio no ano passado. Para cada ano mais antigo, aposta só <strong>60% do anterior</strong> — a lembrança vai desbotando. No fim, reparte tudo para somar 100%.</p>
+    <div class="two rv d3" style="align-items:flex-start;gap:clamp(1.4rem,3vw,3rem)">
+      <div class="panel" style="padding:clamp(1rem,2vw,1.6rem)">
+        <div class="tag" style="margin-bottom:.9rem">Etapa 1 · o “peso bruto” de cada ano</div>
+        <div id="calc60"></div>
+        <div class="callout blue" style="margin-top:1.1rem;font-size:.9rem">Cada degrau é o anterior <strong>× 0,6</strong>. Some todos: dá <strong class="mono">2,458</strong>.</div>
+      </div>
+      <div>
+        <div class="panel" style="padding:clamp(1rem,2vw,1.6rem);margin-bottom:1.1rem">
+          <div class="tag" style="margin-bottom:.7rem">Etapa 2 · virar porcentagem</div>
+          <p class="lead" style="font-size:.98rem;max-width:none;margin-bottom:.8rem">Cada peso vira uma fatia da soma. É por isso que os pesos fecham em 100% — são fatias de um bolo só.</p>
+          <div style="display:flex;flex-direction:column;gap:.5rem">
+            <div class="kv" style="font-size:.95rem"><b>2026:</b>&nbsp;1,000 ÷ 2,458 = <span class="mono hl-b">40,7%</span></div>
+            <div class="kv" style="font-size:.95rem"><b>2019:</b>&nbsp;0,028 ÷ 2,458 = <span class="mono hl-b">1,1%</span></div>
+          </div>
+        </div>
+        <div class="callout green" style="font-size:.92rem">
+          <strong>E com 4 anos?</strong> A regra “× 0,6” não muda — só o bolo fica menor. Somam-se apenas os 4 pesos (dá <strong class="mono">2,176</strong>) e refaz-se a divisão. Como o bolo encolheu, cada fatia cresce: <strong>2026 sobe de 40,7% para 46,0%</strong>. Ninguém é avaliado por anos em que não existia.
+        </div>
       </div>
     </div>
   </div>
@@ -530,6 +587,386 @@ svg{display:block;width:100%;height:auto;overflow:visible}
   </div>
 </section>
 
+<!-- 21 · INTRO DA TABELA FINAL -->
+<section class="slide dark" data-title="Valor final por órgão">
+  <div class="wide">
+    <div class="eyebrow rv">O detalhe completo</div>
+    <h2 class="rv d1" style="margin:1rem 0 1.4rem;max-width:26ch;color:#fff">O valor final de cada um dos 47 órgãos — com a justificativa.</h2>
+    <p class="lead rv d2" style="max-width:58ch">A seguir, a lista completa: quanto cada órgão receberá, a diferença em relação a hoje, o percentual e <strong>o porquê de cada número</strong>. Tudo ancorado no histórico de execução do próprio órgão.</p>
+    <div class="rv d3" style="display:flex;gap:clamp(1rem,4vw,3.5rem);flex-wrap:wrap;margin-top:2.4rem">
+      <div><div class="bignum" style="font-size:clamp(1.9rem,4vw,2.8rem);color:#7FD8AC">R$ 1,46 bi</div><div class="tag" style="color:#8FA6BC;margin-top:.4rem">novo total (soma dos 47)</div></div>
+      <div><div class="bignum" style="font-size:clamp(1.9rem,4vw,2.8rem);color:#8FB9E0">+ R$ 137,6 mi</div><div class="tag" style="color:#8FA6BC;margin-top:.4rem">acréscimo distribuído</div></div>
+          </div>
+    <div class="rv d4 legend-inline" style="margin-top:2rem;color:#8FA6BC">
+      <span><span class="pill g">+&nbsp;%</span> aumento</span>
+      <span><span class="pill a">0&nbsp;%</span> mantido</span>
+      <span><span class="pill r">−&nbsp;%</span> redução</span>
+      <span style="opacity:.8">· ordenado do maior para o menor limite ·</span>
+    </div>
+  </div>
+</section>
+
+<!-- 22 · TABELA COMPLETA -->
+<section class="slide tbl-slide" data-title="Tabela — 47 órgãos">
+  <div class="wide" style="max-width:1320px">
+    <div class="tbl-head">
+      <div>
+        <div class="eyebrow rv" style="margin-bottom:.5rem">Proposta 2027 · valor, diferença e justificativa</div>
+        <h2 class="rv d1" style="font-size:clamp(1.3rem,2.6vw,1.9rem)">Os 47 órgãos, um a um</h2>
+      </div>
+      <div class="rv d1 tag" style="align-self:flex-end">role a tabela para ver todos ↓</div>
+    </div>
+    <div class="tbl-wrap rv d2">
+      <div class="tbl-scroll">
+        <table class="ftbl">
+          <colgroup><col class="c-og"><col class="c-vl"><col class="c-df"><col class="c-pc"><col class="c-ju"></colgroup>
+          <thead>
+            <tr><th class="og">Órgão</th><th class="vl">Valor 2027</th><th class="df">Diferença</th><th class="pc">%</th><th class="ju">Justificativa e embasamento</th></tr>
+          </thead>
+          <tbody>
+      <tr>
+        <td class="og">Ministério da Fazenda</td>
+        <td class="vl mono">R$ 338.290.806</td>
+        <td class="df mono">+R$ 48.588.183</td>
+        <td class="pc"><span class="pill g">+16,8%</span></td>
+        <td class="ju">Pedido acolhido em 99,58% (R$ 338.290.806 de R$ 339.702.623 pleiteados). Histórico confirma a necessidade: IHE 83.8% (média ponderada de 8 anos, tendência +4.1 p.p./ano); limite ultrapassado em 2 ano(s) da série. Ajuste marginal de R$ 1.411.817 — equivalente a 0,42% do valor proposto. O limite proposto permanece cobrindo 1,92 vez o custo de referência do efetivo, sem comprometer o atendimento das novas estruturas (Secretarias de Prêmios e Apostas e do Mercado de Carbono). Efetivo 541 (custo de referência R$ 175.825.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Advocacia-Geral da União (AGU)</td>
+        <td class="vl mono">R$ 211.239.230</td>
+        <td class="df mono">+R$ 9.289.679</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">AGU — exceção deliberada: IHE 80.1% (média ponderada de 8 anos, tendência -11.8 p.p./ano). O custeio pleno do efetivo (1119 empregados ≈ R$ 363.675.000) seria desproporcional; aplicado apenas o reajuste CCT de 4,6%.</td>
+      </tr>
+      <tr>
+        <td class="og">Min. da Gestão e Inovação (MGI)</td>
+        <td class="vl mono">R$ 152.123.604</td>
+        <td class="df mono">+R$ 11.953.804</td>
+        <td class="pc"><span class="pill g">+8,5%</span></td>
+        <td class="ju">Pedido ACOLHIDO INTEGRALMENTE (100% da solicitação de R$ 152.123.604). Histórico confirma a necessidade: IHE 76.2% (média ponderada de 4 anos — órgão integra a série desde 2023, tendência -26.6 p.p./ano); limite ultrapassado em 1 ano(s) da série. Efetivo 476 (custo de referência R$ 154.700.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Presidência da República</td>
+        <td class="vl mono">R$ 133.250.800</td>
+        <td class="df mono">+R$ 5.859.978</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução alta e sustentada: IHE 80.3% (média ponderada de 8 anos, tendência -9.9 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 259 (ref. R$ 84.175.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Min. da Previdência Social</td>
+        <td class="vl mono">R$ 67.479.857</td>
+        <td class="df mono">+R$ 2.967.565</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução regular ao longo da série: IHE 72.3% (média ponderada de 4 anos — órgão integra a série desde 2023, tendência -12.6 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 24 (ref. R$ 7.800.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Min. da Justiça e Segurança Pública</td>
+        <td class="vl mono">R$ 64.111.207</td>
+        <td class="df mono">+R$ 2.819.422</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução regular ao longo da série: IHE 66.7% (média ponderada de 8 anos, tendência -10.0 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 69 (ref. R$ 22.425.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Ministério dos Transportes</td>
+        <td class="vl mono">R$ 48.755.276</td>
+        <td class="df mono">+R$ 2.144.113</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução regular ao longo da série: IHE 70.9% (média ponderada de 8 anos, tendência -19.6 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 23 (ref. R$ 7.475.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Ministério da Educação</td>
+        <td class="vl mono">R$ 46.375.124</td>
+        <td class="df mono">+R$ 2.039.441</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução regular ao longo da série: IHE 73.1% (média ponderada de 8 anos, tendência -9.1 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 3 (ref. R$ 975.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Ag. Nac. do Petróleo (ANP)</td>
+        <td class="vl mono">R$ 29.545.713</td>
+        <td class="df mono">+R$ 4.102.896</td>
+        <td class="pc"><span class="pill g">+16,1%</span></td>
+        <td class="ju">Pedido ACOLHIDO INTEGRALMENTE (100% da solicitação de R$ 29.545.713). Histórico confirma a necessidade: IHE 84.3% (média ponderada de 8 anos, tendência +9.0 p.p./ano); limite ultrapassado em 1 ano(s) da série. Efetivo 86 (custo de referência R$ 27.950.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Ministério da Defesa</td>
+        <td class="vl mono">R$ 29.385.952</td>
+        <td class="df mono">+R$ 1.292.308</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução regular ao longo da série: IHE 68.8% (média ponderada de 8 anos, tendência +0.8 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 33 (ref. R$ 10.725.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Min. do Trabalho e Emprego (MTE)</td>
+        <td class="vl mono">R$ 26.000.000</td>
+        <td class="df mono">+R$ 8.000.000</td>
+        <td class="pc"><span class="pill g">+44,4%</span></td>
+        <td class="ju">Pedido ACOLHIDO INTEGRALMENTE (100% da solicitação de R$ 26.000.000). Histórico confirma a necessidade: IHE 71.6% (média ponderada de 6 anos — órgão integra a série desde 2021, tendência -4.9 p.p./ano); limite ultrapassado em 1 ano(s) da série. Efetivo 82 (custo de referência R$ 26.650.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Min. da Ciência e Tecnologia (MCTI)</td>
+        <td class="vl mono">R$ 25.525.064</td>
+        <td class="df mono">+R$ 1.122.517</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução alta e sustentada: IHE 75.9% (média ponderada de 8 anos, tendência -23.9 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 23 (ref. R$ 7.475.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Banco Central — COAF</td>
+        <td class="vl mono">R$ 25.054.844</td>
+        <td class="df mono">+R$ 12.527.422</td>
+        <td class="pc"><span class="pill g">+100,0%</span></td>
+        <td class="ju">Pedido ACOLHIDO INTEGRALMENTE (100% da solicitação de R$ 25.054.844). Histórico confirma a necessidade: IHE 64.0% (média ponderada de 6 anos — órgão integra a série desde 2021, tendência +18.1 p.p./ano). Efetivo 0 (custo de referência R$ 0).</td>
+      </tr>
+      <tr>
+        <td class="og">Controladoria-Geral da União (CGU)</td>
+        <td class="vl mono">R$ 24.241.050</td>
+        <td class="df mono">+R$ 1.066.050</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução alta e sustentada: IHE 76.6% (média ponderada de 8 anos, tendência -25.4 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 46 (ref. R$ 14.950.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Ministério da Saúde</td>
+        <td class="vl mono">R$ 20.140.482</td>
+        <td class="df mono">+R$ 1.758.935</td>
+        <td class="pc"><span class="pill g">+9,6%</span></td>
+        <td class="ju">RISCO DE EXAURIMENTO: IHE 101.4% (média ponderada de 8 anos, tendência +5.2 p.p./ano), com o limite ultrapassado em 4 dos 8 anos da série. Recebeu reajuste CCT de 4,6% mais o reforço prioritário do saldo disponível. Efetivo 14.</td>
+      </tr>
+      <tr>
+        <td class="og">Ag. Nac. de Aviação Civil (ANAC)</td>
+        <td class="vl mono">R$ 20.000.000</td>
+        <td class="df mono">+R$ 5.612.204</td>
+        <td class="pc"><span class="pill g">+39,0%</span></td>
+        <td class="ju">Pedido ACOLHIDO INTEGRALMENTE (100% da solicitação de R$ 20.000.000). Histórico confirma a necessidade: IHE 69.6% (média ponderada de 8 anos, tendência -2.6 p.p./ano). Efetivo 38 (custo de referência R$ 12.350.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Ag. Nac. de Telecom. (ANATEL)</td>
+        <td class="vl mono">R$ 17.153.240</td>
+        <td class="df mono">+R$ 5.000.000</td>
+        <td class="pc"><span class="pill g">+41,1%</span></td>
+        <td class="ju">Pedido ACOLHIDO INTEGRALMENTE (100% da solicitação de R$ 17.153.240). Histórico confirma a necessidade: IHE 82.6% (média ponderada de 8 anos, tendência +1.3 p.p./ano); limite ultrapassado em 1 ano(s) da série. Efetivo 26 (custo de referência R$ 8.450.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Min. de Portos e Aeroportos</td>
+        <td class="vl mono">R$ 14.946.262</td>
+        <td class="df mono">+R$ 657.293</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução regular ao longo da série: IHE 58.8% (média ponderada de 4 anos — órgão integra a série desde 2023, tendência +10.4 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 23 (ref. R$ 7.475.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Min. dos Direitos Humanos</td>
+        <td class="vl mono">R$ 13.680.738</td>
+        <td class="df mono">+R$ 601.639</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução regular ao longo da série: IHE 61.7% (média ponderada de 8 anos, tendência -26.4 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 18 (ref. R$ 5.850.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Min. Desenv., Indústria e Com. (MDIC)</td>
+        <td class="vl mono">R$ 12.979.675</td>
+        <td class="df mono">+R$ 1.300.000</td>
+        <td class="pc"><span class="pill g">+11,1%</span></td>
+        <td class="ju">Pedido ACOLHIDO INTEGRALMENTE (100% da solicitação de R$ 12.979.675). Histórico confirma a necessidade: IHE 64.6% (média ponderada de 4 anos — órgão integra a série desde 2023, tendência -1.5 p.p./ano). Efetivo 15 (custo de referência R$ 4.875.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Min. do Planejamento e Orçamento (MPO)</td>
+        <td class="vl mono">R$ 11.270.000</td>
+        <td class="df mono">+R$ 1.026.683</td>
+        <td class="pc"><span class="pill g">+10,0%</span></td>
+        <td class="ju">Pedido ACOLHIDO INTEGRALMENTE (100% da solicitação de R$ 11.270.000). Histórico confirma a necessidade: IHE 51.2% (média ponderada de 4 anos — órgão integra a série desde 2023, tendência -3.9 p.p./ano). Efetivo 10 (custo de referência R$ 3.250.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Min. da Integração e Des. Regional</td>
+        <td class="vl mono">R$ 10.744.867</td>
+        <td class="df mono">+R$ 472.528</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução regular ao longo da série: IHE 59.3% (média ponderada de 8 anos, tendência -22.0 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 7 (ref. R$ 2.275.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Ministério das Cidades (MCID)</td>
+        <td class="vl mono">R$ 10.000.000</td>
+        <td class="df mono">+R$ 4.700.000</td>
+        <td class="pc"><span class="pill g">+88,7%</span></td>
+        <td class="ju">Pedido ACOLHIDO INTEGRALMENTE (100% da solicitação de R$ 10.000.000). Histórico confirma a necessidade: IHE 66.6% (média ponderada de 4 anos — órgão integra a série desde 2023, tendência +13.3 p.p./ano). Efetivo 8 (custo de referência R$ 2.600.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Min. do Meio Ambiente e Clima</td>
+        <td class="vl mono">R$ 9.678.636</td>
+        <td class="df mono">+R$ 425.638</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução regular ao longo da série: IHE 60.3% (média ponderada de 8 anos, tendência -2.7 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 1 (ref. R$ 325.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Min. Desenv. e Assist. Social (MDS)</td>
+        <td class="vl mono">R$ 9.653.162</td>
+        <td class="df mono">+R$ 1.600.000</td>
+        <td class="pc"><span class="pill g">+19,9%</span></td>
+        <td class="ju">Pedido ACOLHIDO INTEGRALMENTE (100% da solicitação de R$ 9.653.162). Histórico confirma a necessidade: IHE 86.9% (média ponderada de 8 anos, tendência -2.1 p.p./ano); limite ultrapassado em 3 ano(s) da série. Efetivo 11 (custo de referência R$ 3.575.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Ministério das Comunicações</td>
+        <td class="vl mono">R$ 9.414.000</td>
+        <td class="df mono">+R$ 414.000</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução regular ao longo da série: IHE 62.6% (média ponderada de 7 anos — órgão integra a série desde 2020, tendência -8.5 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 14 (ref. R$ 4.550.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Ministério da Cultura</td>
+        <td class="vl mono">R$ 8.912.250</td>
+        <td class="df mono">+R$ 0</td>
+        <td class="pc"><span class="pill a">+0,0%</span></td>
+        <td class="ju">Execução moderada: IHE 49.0% (média ponderada de 4 anos — órgão integra a série desde 2023, tendência -36.5 p.p./ano). Limite mantido — nível insuficiente para reajuste, mas sem subexecução crônica que justifique corte. Efetivo 4.</td>
+      </tr>
+      <tr>
+        <td class="og">Ag. Nac. Vigilância Sanitária (ANVISA)</td>
+        <td class="vl mono">R$ 7.283.686</td>
+        <td class="df mono">+R$ 0</td>
+        <td class="pc"><span class="pill a">+0,0%</span></td>
+        <td class="ju">Execução moderada: IHE 50.1% (média ponderada de 8 anos, tendência +4.4 p.p./ano). Limite mantido — nível insuficiente para reajuste, mas sem subexecução crônica que justifique corte. Efetivo 24.</td>
+      </tr>
+      <tr>
+        <td class="og">Ag. Nac. Transp. Terrestres (ANTT)</td>
+        <td class="vl mono">R$ 6.406.437</td>
+        <td class="df mono">+R$ 1.411.817</td>
+        <td class="pc"><span class="pill g">+28,3%</span></td>
+        <td class="ju">Pedido SUBSIDIÁRIO acolhido integralmente (R$ 6.406.437, formulado pela própria Agência no Ofício 24609/2026/DG-ANTT). Protocolado em 13/07/2026, após o prazo do art. 7º da Portaria 61/2023 (31/05), foi admitido em razão da tempestividade da instrução e da consistência da fundamentação. Histórico: IHE 49.0% (média ponderada de 8 anos, tendência +3.7 p.p./ano), com execução em recuperação (53% anualizado em 2026 ante 39% em 2025). Necessidades documentadas somam R$ 5.854.544 (11 empregados em exercício = R$ 3.824.544; tratativas em curso = R$ 730.000; processos represados = R$ 1.300.000), integralmente cobertas. O pedido principal (R$ 9.010.305) equivaleria a 154% das necessidades documentadas e repetiria a ampliação de 2022, quando o limite dobrou e a execução caiu de 91% para 42%. Efetivo cadastrado 9; a Agência declara 11 em exercício e prevê 4 ingressos.</td>
+      </tr>
+      <tr>
+        <td class="og">Min. dos Povos Indígenas</td>
+        <td class="vl mono">R$ 5.700.000</td>
+        <td class="df mono">−R$ 300.000</td>
+        <td class="pc"><span class="pill r">-5,0%</span></td>
+        <td class="ju">Execução baixa: IHE 35.3% (média ponderada de 4 anos — órgão integra a série desde 2023, tendência +9.4 p.p./ano). Corte reduzido à metade (−5% em vez de −10%) porque a série indica recuperação consistente da capacidade de execução. Efetivo 0.</td>
+      </tr>
+      <tr>
+        <td class="og">Ag. Nac. de Águas (ANA)</td>
+        <td class="vl mono">R$ 5.200.046</td>
+        <td class="df mono">+R$ 228.683</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução regular ao longo da série: IHE 62.0% (média ponderada de 8 anos, tendência +22.8 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 11 (ref. R$ 3.575.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Ag. Nac. de Mineração (ANM)</td>
+        <td class="vl mono">R$ 4.875.362</td>
+        <td class="df mono">+R$ 214.404</td>
+        <td class="pc"><span class="pill g">+4,6%</span></td>
+        <td class="ju">Execução regular ao longo da série: IHE 66.9% (média ponderada de 8 anos, tendência +11.4 p.p./ano). Reajuste CCT de 4,6% sobre o limite vigente. Efetivo 16 (ref. R$ 5.200.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Min. de Minas e Energia</td>
+        <td class="vl mono">R$ 4.847.850</td>
+        <td class="df mono">−R$ 255.150</td>
+        <td class="pc"><span class="pill r">-5,0%</span></td>
+        <td class="ju">Execução baixa: IHE 34.4% (média ponderada de 8 anos, tendência +10.8 p.p./ano). Corte reduzido à metade (−5% em vez de −10%) porque a série indica recuperação consistente da capacidade de execução. Efetivo 0.</td>
+      </tr>
+      <tr>
+        <td class="og">Ag. Nac. de Energia Elétrica (ANEEL)</td>
+        <td class="vl mono">R$ 4.500.000</td>
+        <td class="df mono">+R$ 0</td>
+        <td class="pc"><span class="pill a">+0,0%</span></td>
+        <td class="ju">Execução moderada: IHE 53.1% (média ponderada de 8 anos, tendência -2.2 p.p./ano). Limite mantido — nível insuficiente para reajuste, mas sem subexecução crônica que justifique corte. Efetivo 7.</td>
+      </tr>
+      <tr>
+        <td class="og">Ministério das Mulheres</td>
+        <td class="vl mono">R$ 4.090.000</td>
+        <td class="df mono">+R$ 0</td>
+        <td class="pc"><span class="pill a">+0,0%</span></td>
+        <td class="ju">Execução moderada: IHE 48.7% (média ponderada de 4 anos — órgão integra a série desde 2023, tendência +12.2 p.p./ano). Limite mantido — nível insuficiente para reajuste, mas sem subexecução crônica que justifique corte. Efetivo 3.</td>
+      </tr>
+      <tr>
+        <td class="og">Ag. Nac. Transp. Aquaviários (ANTAQ)</td>
+        <td class="vl mono">R$ 3.764.994</td>
+        <td class="df mono">+R$ 1.000.000</td>
+        <td class="pc"><span class="pill g">+36,2%</span></td>
+        <td class="ju">Pedido ACOLHIDO INTEGRALMENTE (100% da solicitação de R$ 3.764.994). Histórico confirma a necessidade: IHE 67.0% (média ponderada de 8 anos, tendência -4.4 p.p./ano); limite ultrapassado em 1 ano(s) da série. Efetivo 7 (custo de referência R$ 2.275.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Min. da Agricultura e Pecuária</td>
+        <td class="vl mono">R$ 3.333.473</td>
+        <td class="df mono">+R$ 0</td>
+        <td class="pc"><span class="pill a">+0,0%</span></td>
+        <td class="ju">Execução moderada: IHE 49.0% (média ponderada de 8 anos, tendência -29.1 p.p./ano). Limite mantido — nível insuficiente para reajuste, mas sem subexecução crônica que justifique corte. Efetivo 1.</td>
+      </tr>
+      <tr>
+        <td class="og">Ministério do Esporte</td>
+        <td class="vl mono">R$ 2.662.000</td>
+        <td class="df mono">+R$ 100.000</td>
+        <td class="pc"><span class="pill g">+3,9%</span></td>
+        <td class="ju">Pedido atendido PARCIALMENTE (+R$ 100.000). O histórico não confirma a necessidade: IHE 20.1% (média ponderada de 4 anos — órgão integra a série desde 2023, tendência +7.2 p.p./ano), com 1 ano(s) de execução nula — a menor da série entre os solicitantes. Efetivo 2.</td>
+      </tr>
+      <tr>
+        <td class="og">Min. do Desenv. Agrário</td>
+        <td class="vl mono">R$ 2.625.000</td>
+        <td class="df mono">+R$ 0</td>
+        <td class="pc"><span class="pill a">+0,0%</span></td>
+        <td class="ju">Execução moderada: IHE 46.7% (média ponderada de 4 anos — órgão integra a série desde 2023, tendência +18.5 p.p./ano). Limite mantido — nível insuficiente para reajuste, mas sem subexecução crônica que justifique corte. Efetivo 1.</td>
+      </tr>
+      <tr>
+        <td class="og">Min. da Pesca e Aquicultura</td>
+        <td class="vl mono">R$ 2.280.000</td>
+        <td class="df mono">−R$ 120.000</td>
+        <td class="pc"><span class="pill r">-5,0%</span></td>
+        <td class="ju">Execução baixa: IHE 30.1% (média ponderada de 4 anos — órgão integra a série desde 2023, tendência +13.2 p.p./ano). Corte reduzido à metade (−5% em vez de −10%) porque a série indica recuperação consistente da capacidade de execução. Efetivo 2.</td>
+      </tr>
+      <tr>
+        <td class="og">Gab. da Vice-Presidência</td>
+        <td class="vl mono">R$ 2.059.142</td>
+        <td class="df mono">+R$ 0</td>
+        <td class="pc"><span class="pill a">+0,0%</span></td>
+        <td class="ju">Execução moderada: IHE 51.4% (média ponderada de 8 anos, tendência -4.2 p.p./ano). Limite mantido — nível insuficiente para reajuste, mas sem subexecução crônica que justifique corte. Efetivo 4.</td>
+      </tr>
+      <tr>
+        <td class="og">Min. da Igualdade Racial</td>
+        <td class="vl mono">R$ 2.023.000</td>
+        <td class="df mono">−R$ 357.000</td>
+        <td class="pc"><span class="pill r">-15,0%</span></td>
+        <td class="ju">Execução cronicamente baixa: IHE 18.1% (média ponderada de 4 anos — órgão integra a série desde 2023, tendência +0.9 p.p./ano), com 1 ano(s) de execução nula. Redução de 15% para realocar dotação ociosa (art. 4º da Portaria 61/2023). Efetivo 1.</td>
+      </tr>
+      <tr>
+        <td class="og">Conselho Administrativo de Defesa Econômica - Cade</td>
+        <td class="vl mono">R$ 1.792.383</td>
+        <td class="df mono">+R$ 0</td>
+        <td class="pc"><span class="pill a">+0,0%</span></td>
+        <td class="ju">Execução moderada: IHE 54.7% (média ponderada de 8 anos, tendência -4.8 p.p./ano). Limite mantido — nível insuficiente para reajuste, mas sem subexecução crônica que justifique corte. Efetivo 3.</td>
+      </tr>
+      <tr>
+        <td class="og">Ag. Nac. Saúde Suplementar (ANS)</td>
+        <td class="vl mono">R$ 1.666.494</td>
+        <td class="df mono">+R$ 308.046</td>
+        <td class="pc"><span class="pill g">+22,7%</span></td>
+        <td class="ju">Pedido ACOLHIDO INTEGRALMENTE (100% da solicitação de R$ 1.666.494). Histórico confirma a necessidade: IHE 57.5% (média ponderada de 8 anos, tendência -14.7 p.p./ano); limite ultrapassado em 1 ano(s) da série. Efetivo 3 (custo de referência R$ 975.000).</td>
+      </tr>
+      <tr>
+        <td class="og">Min. do Empreendedorismo</td>
+        <td class="vl mono">R$ 1.000.000</td>
+        <td class="df mono">+R$ 0</td>
+        <td class="pc"><span class="pill a">+0,0%</span></td>
+        <td class="ju">Execução moderada: IHE 46.1% (média ponderada de 4 anos — órgão integra a série desde 2023, tendência +11.8 p.p./ano). Limite mantido — nível insuficiente para reajuste, mas sem subexecução crônica que justifique corte. Efetivo 1.</td>
+      </tr>
+      <tr>
+        <td class="og">Ag. Nac. do Cinema (ANCINE)</td>
+        <td class="vl mono">R$ 200.000</td>
+        <td class="df mono">−R$ 1.000.000</td>
+        <td class="pc"><span class="pill r">-83,3%</span></td>
+        <td class="ju">Execução nula crônica: IHE 3.4% (média ponderada de 8 anos, tendência +0.0 p.p./ano), com 5 dos 8 anos sem qualquer execução. Limite reduzido ao piso de cautela de R$ 200.000 (art. 4º da Portaria 61/2023).</td>
+      </tr>
+      <tr>
+        <td class="og">Ministério do Turismo</td>
+        <td class="vl mono">R$ 200.000</td>
+        <td class="df mono">−R$ 1.000.000</td>
+        <td class="pc"><span class="pill r">-83,3%</span></td>
+        <td class="ju">Execução nula crônica: IHE 11.6% (média ponderada de 8 anos, tendência +0.0 p.p./ano), com 4 dos 8 anos sem qualquer execução. Limite reduzido ao piso de cautela de R$ 200.000 (art. 4º da Portaria 61/2023).</td>
+      </tr>
+            <tr class="total">
+              <td class="og">TOTAL — 47 órgãos</td>
+              <td class="vl mono">R$ 1.456.461.706</td>
+              <td class="df mono">+R$ 137.573.098</td>
+              <td class="pc">+10,4%</td>
+              <td class="ju">Soma exata dos limites propostos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
 </div>
 
 <script>
@@ -624,6 +1061,21 @@ svg{display:block;width:100%;height:auto;overflow:visible}
   const ANTT=[[2019,2.7,2.7],[2020,2.8,3.03],[2021,2.8,2.56],[2022,5.88,2.48],[2023,5.88,2.38],[2024,5.88,2.38],[2025,4.99,1.95],[2026,4.99,2.67]];
 
   const CHARTS={
+    // ----- calc dos pesos brutos (×0,6) -----
+    'calc60':(c)=>{
+      const D=[["2026",1.000],["2025",0.600],["2024",0.360],["2023",0.216],["2022",0.130],["2021",0.078],["2020",0.047],["2019",0.028]];
+      const rowH=30, W=440, H=D.length*rowH+6, lab=44, valW=118, max=1.0;
+      const s=svg(W,H);
+      D.forEach((d,i)=>{
+        const y=i*rowH+4; const bw=(W-lab-valW)*(d[1]/max);
+        txt(s,0,y+15,d[0],{fill:'var(--ink)',size:11.5,weight:500});
+        s.appendChild(el('rect',{x:lab,y:y+3,width:W-lab-valW,height:16,rx:4,fill:'var(--line)'}));
+        const r=el('rect',{x:lab,y:y+3,width:bw,height:16,rx:4,fill:i===0?'var(--blue)':(i<3?'var(--blue2)':'#9DBBD6')});s.appendChild(r);grow(r,bw,false);
+        const lbl = i===0 ? '1,000' : d[1].toFixed(3).replace('.',',')+ (i>0?'  (×0,6)':'');
+        txt(s,W,y+15,lbl,{anchor:'end',fill:i===0?'var(--ink)':'var(--ink-soft)',size:10.5,weight:i===0?600:400});
+      });
+      c.appendChild(s);
+    },
     // ----- system evolution -----
     'chart-sys':(c)=>{
       const W=1000,H=380,pl=54,pr=30,pt=24,pb=44;
